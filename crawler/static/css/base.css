@@ -94,15 +94,8 @@ form p {
     overflow:auto;
 }
 
-label {
-    float:left;
-    clear:both;
-    color:#333;
-    margin-bottom:4px;
-}
 input, textarea {
     clear:both;
-    float:left;
     margin:0 0 10px;
     background:#efefef;
     border:0;
@@ -238,11 +231,12 @@ a.like, a.follow { float:right; margin-top:-8px; }
 }
 
 /* users */
-#people-list img {
-    width:180px;
-    height:180px;
+#people-list {
+    font-size: medium;
+    padding-left: 75px;
     border-radius:50%;
-    margin-bottom:20px;
+    margin-top:15px;
+    margin-bottom:5px;
 }
 #people-list .user {
     width:180px;
@@ -275,3 +269,4 @@ img.user-detail {
     font-style:italic;
     color:#ccc;
 }
+

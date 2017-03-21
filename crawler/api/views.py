@@ -60,7 +60,7 @@ class Positions_change_List(generics.ListAPIView):
     serializer_class = Positions_change_Serializer
 
     def get_queryset(self):
-        portfolio = self.kwargs['portfolio']
+        portfolio =Portfolio.objects.filter(slug = self.kwargs['portfolio']).first().id
         return Positions_change.objects.filter(portfolio=portfolio)
 
 
@@ -68,5 +68,5 @@ class Accumulated_position_List(generics.ListAPIView):
     serializer_class = Accumulated_position_Serializer
 
     def get_queryset(self):
-        portfolio = self.kwargs['portfolio']
+        portfolio =Portfolio.objects.filter(slug = self.kwargs['portfolio']).first().id
         return Accumulated_position.objects.filter(portfolio=portfolio)

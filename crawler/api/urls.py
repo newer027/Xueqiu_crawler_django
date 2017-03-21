@@ -17,7 +17,7 @@ urlpatterns = [
         views.Accumulated_position_ListView.as_view(), name='accumulated_position_list'),
     #url(r'^accumulated_position/(?P<pk>\d+)/$',
     #    views.Accumulated_position_DetailView.as_view(), name='accumulated_position_detail'),
-    url('^positions_change/(?P<portfolio>\d+)/$', views.Positions_change_List.as_view()),
-    url('^accumulated_position/(?P<portfolio>\d+)/$', views.Accumulated_position_List.as_view()),
+    url('^positions_change/(?P<portfolio>\d+)$', views.Positions_change_List.as_view()),
+    url('^accumulated_position/(?P<portfolio>\d+)$', views.Accumulated_position_List.as_view()),
     url(r'^', include(router.urls)),
 ]

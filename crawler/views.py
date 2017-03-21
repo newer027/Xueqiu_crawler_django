@@ -25,4 +25,4 @@ def portfolio_detail(request, slug):
     portfolio = get_object_or_404(Portfolio, slug = slug) #get_object_or_404的用法
     accums = Accumulated_position.objects.filter(portfolio=portfolio)
     positions = Positions_change.objects.filter(portfolio=portfolio)
-    return render(request, 'crawler/crawler/detail.html', {'portfolio': portfolio,'accums':accums, 'positions':positions}) #render的用法
+    return render(request, 'crawler/crawler/detail.html', {'portfolio': portfolio, 'accums':accums, 'positions':positions}) #render的用法
