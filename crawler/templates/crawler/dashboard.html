@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <!--使用utf-8字符集-->
+    <meta charset="utf-8" />
+    <title>Xueqiu Crawler</title> <!--title用法-->
+    <link href="{% static "css/base.css" %}" rel="stylesheet"> <!--css用法-->
+</head>
+<body>
+    <div id="header">
+        <span class="logo">Xueqiu Crawler</span>
+    </div>
+
+    <div id="content">
+        {% if messages %} <!--messages的用法-->
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">
+                        {{ message|safe }} <!--safe的用法-->
+                        <a href="#" class="close">×</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form action="." method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Submit">
+        </form>
+
+        <ul class="messages"><li class="success">已经抓取的雪球账号</li></ul>
+        <div id="people-list">
+            {% for portfolio in portfolios %}
+                <div class="user">
+                    <a href="{{ portfolio.get_absolute_url }}">
+                        {{ portfolio.title }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script> <!--jquery的用法-->
+</body>
+</html>
