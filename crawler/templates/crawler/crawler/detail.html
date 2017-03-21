@@ -8,53 +8,77 @@
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <script src="http://cdn.staticdetail0.html.runoob.com/libs/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <link href="{% static "css/dataTables.css" %}" rel="stylesheet"> <!--css用法-->
     <link href="{% static "css/base.css" %}" rel="stylesheet"> <!--css用法-->
 </head>
 <body>
     <div id="header">
-        <span class="logo">Xueqiu Crawler</span>
+        <span class="logo"><a href="{% url "crawler:dashboard" %}"> Xueqiu Crawler </a></span>
     </div>
 
     <div id="people-list">
-        {{ portfolio.title }}
+        <a>雪球ID {{ portfolio.title }} 关注的组合信息</a>
     </div>
 
+
     <div class="col-sm-7">
+    <div class="row-sm-7 col-sm-offset-1">
         <br>
         <h4>关注组合最新调仓：</h4>
-        <div style="overflow: auto;" spry:region="positions_change">
-            <table class="table table-fixed table-striped">
-                <tbody>
+        <div style="overflow: auto;">
+            <table id="" class="display" cellspacing="0" width="100%">
+                <thead>
                     <tr>
-                        <th spry:sort="time">time</th>
-                        <th spry:sort="name">name</th>
-                        <th spry:sort="code">code</th>
-                        <th spry:sort="detail">detail</th>
+                        <th>time</th>
+                        <th>name</th>
+                        <th>code</th>
+                        <th>detail</th>
                     </tr>
+                </thead>
+                <tbody>
                     {% for position in positions %}
-                        <tr spry:repeat="positions_change">
+                        <tr>
                             <td>{{ position.time }}</td>
                             <td>{{ position.name }}</td>
                             <td>{{ position.code }}</td>
                             <td>{{ position.detail }}</td>
                         </tr>
                     {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
 
+    <div class="col-sm-5">
+        <br>
+        <h4>组合累计信息：</h4>
+        <div style="overflow: auto;">
+            <table id="" class="display" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>stock</th>
+                        <th>percent</th>
+                        <th>people</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for accum in accums %}
+                    <tr>
+                        <td>{{ accum.stock }}</td>
+                        <td>{{ accum.percent }}</td>
+                        <td>{{ accum.people }}</td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
 
-
-
-    <script type="text/javascript" src="/static/angular.js"></script>
-    <script type="text/javascript" src="/static/main.js"></script>
-
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/main.js"></script>
 </body>
 </html>
