@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from crawler.models import Portfolio, Positions_change, Accumulated_position
-from crawler.login import login
+#from crawler.models import Portfolio, Positions_change, Accumulated_position
+from login import login
 from datetime import datetime
 from decimal import Decimal
-from django.db.models import F
+#from django.db.models import F
 
 import json
 import requests
@@ -32,17 +32,14 @@ session = requests.session()
 def save_latest_change(url):
     ZHs0={}
     headers = login(telephone, password)
+    print(headers)
     url0 = 'https://xueqiu.com/stock/portfolio/stocks.json?size=1000&pid=-1&tuid='+url+'&cuid=1180102135&_=1477728185503'
     data = session.get(url0, headers=headers).text
     data = json.loads(data)
 
-    if not Portfolio.objects.filter(slug=url).exists():
-        portfolio = Portfolio(
-            title=url,
-            slug=url,
-            status='pending'
-        )
-        portfolio.save()
+
+    print(data["stocks"], "stock"*20)
+
 
     if data["stocks"]:
         for item in data["stocks"]:
@@ -56,7 +53,7 @@ def save_latest_change(url):
         for ZH in ZHs:
             get_xueqiu_hold("https://xueqiu.com/P/"+ZH, headers, url)
 
-
+"""
 def prof(url_ap0, ZHs0, headers, portfilio):
     url = 'https://xueqiu.com/cubes/rebalancing/history.json?cube_symbol='+url_ap0+'&count=20&page=1'
     data = session.get(url, headers=headers).text
@@ -113,3 +110,8 @@ def get_xueqiu_hold(url, headers, portfilio):
             accumulated_position = Accumulated_position.objects.filter(stock=d['stock_name'], portfolio=Portfolio.objects.filter(title=portfilio)[0])
             accumulated_position.update(percent=F('percent')+Decimal(d['weight']))
             accumulated_position.update(people=F('people')+1)
+"""
+
+if __name__ == "__main__":
+    print("what is this")
+    save_latest_change("1180102135")

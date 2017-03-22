@@ -6,11 +6,11 @@
     <meta charset="utf-8" />
     <title>Xueqiu Crawler</title> <!--title用法-->
     <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="{% static "css/base.css" %}" rel="stylesheet"> <!--css用法-->
+    <link href="{% static "css/dataTables.css" %}" rel="stylesheet"> <!--css用法-->
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
     <script src="http://cdn.staticdetail0.html.runoob.com/libs/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
-    <link href="{% static "css/dataTables.css" %}" rel="stylesheet"> <!--css用法-->
-    <link href="{% static "css/base.css" %}" rel="stylesheet"> <!--css用法-->
 </head>
 <body>
     <div id="header">
@@ -27,7 +27,7 @@
         <br>
         <h4>关注组合最新调仓：</h4>
         <div style="overflow: auto;">
-            <table id="" class="display" cellspacing="0" width="100%">
+            <table id="change" class="display" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>time</th>
@@ -39,7 +39,7 @@
                 <tbody>
                     {% for position in positions %}
                         <tr>
-                            <td>{{ position.time }}</td>
+                            <td> {{ position.time |date:"Y-m-d H:i:s" }} </td>
                             <td>{{ position.name }}</td>
                             <td>{{ position.code }}</td>
                             <td>{{ position.detail }}</td>
@@ -55,7 +55,7 @@
         <br>
         <h4>组合累计信息：</h4>
         <div style="overflow: auto;">
-            <table id="" class="display" cellspacing="0" width="100%">
+            <table id="accum" class="display" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>stock</th>
