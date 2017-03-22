@@ -36,25 +36,44 @@ def save_latest_change(url):
     data = session.get(url0, headers=headers).text
     data = json.loads(data)
 
-    if not Portfolio.objects.filter(slug=url).exists():
-        portfolio = Portfolio(
-            title=url,
-            slug=url,
-            status='pending'
-        )
-        portfolio.save()
+    url1 = 'https://xueqiu.com/'+url
+    data1 = session.get(url1, headers=headers).text
+    soup = BeautifulSoup(data1, "lxml")
+    followers = soup.find('li', class_="gender_info" )
+    try:
+        followers = followers.find_next_siblings("li")[0]
+        followers = followers.contents[0]
+    except:
+        followers = "无可奉告"
 
-    if data["stocks"]:
-        for item in data["stocks"]:
-            if re.search('ZH\d{6}',str(item)):
-                ZHs0[item["code"]]=item["stockName"]
-        Positions_change.objects.filter(portfolio=Portfolio.objects.filter(title=url)[0]).delete()
-        for ZH0 in ZHs0:
-            prof(ZH0, ZHs0, headers, url)
-        Accumulated_position.objects.filter(portfolio=Portfolio.objects.filter(title=url)[0]).delete()
-        ZHs = re.findall('ZH\d{6}',data["portfolios"][0]["stocks"])
-        for ZH in ZHs:
-            get_xueqiu_hold("https://xueqiu.com/P/"+ZH, headers, url)
+    ZHs = re.findall('ZH\d{6}',data["portfolios"][0]["stocks"])
+    #if not Portfolio.objects.filter(slug=url).exists():
+    """
+    portfolio = Portfolio(
+        name = soup.title.string[0:len(soup.title.string)-4],
+        followers = followers,
+        num=len(ZHs),
+        title=url,
+        slug=url,
+        status='pending',
+    )
+    portfolio.save()
+    """
+    print(url,followers,len(ZHs),soup.title.string[0:len(soup.title.string)-4])
+    portfolio = Portfolio.objects.filter(title=url)
+    portfolio.update(followers=followers)
+    portfolio.update(num=len(ZHs))
+    portfolio.update(name = soup.title.string[0:len(soup.title.string)-4])
+
+    for item in data["stocks"]:
+        if re.search('ZH\d{6}',str(item)):
+            ZHs0[item["code"]]=item["stockName"]
+    Positions_change.objects.filter(portfolio=Portfolio.objects.filter(title=url)[0]).delete()
+    for ZH0 in ZHs0:
+        prof(ZH0, ZHs0, headers, url)
+    Accumulated_position.objects.filter(portfolio=Portfolio.objects.filter(title=url)[0]).delete()
+    for ZH in ZHs:
+        get_xueqiu_hold("https://xueqiu.com/P/"+ZH, headers, url)
 
 
 def prof(url_ap0, ZHs0, headers, portfilio):
@@ -75,11 +94,9 @@ def prof(url_ap0, ZHs0, headers, portfilio):
     try:
         for i in range(len(data[u'list'])):
             localtime = time.strftime("%y-%m-%d %H:%M:%S", time.localtime(data[u'list'][i]['updated_at'] / 1000))
-            print(localtime,ZHs0[url_ap0])
             if (time.time() - (data[u'list'][i]['updated_at'] / 1000)) < 86400*20:
                 for j in range(len(data[u'list'][i]['rebalancing_histories'])):
                     detail = data[u'list'][i]['rebalancing_histories'][j]['stock_name'] + ': '+ data[u'list'][i]['rebalancing_histories'][j]['prev_weight_adjusted'] + '% ' + ("⬆" if float(data[u'list'][i]['rebalancing_histories'][j]['prev_weight_adjusted'])<float(data[u'list'][i]['rebalancing_histories'][j]['target_weight']) else "⇩") + ' '+ data[u'list'][i]['rebalancing_histories'][j]['target_weight'] + '%'
-                    print(detail,ZHs0[url_ap0], )
                     if not Positions_change.objects.filter(detail=detail, portfolio=Portfolio.objects.filter(title=portfilio)[0], code=url_ap0).exists():
                         positions_change = Positions_change(
                             portfolio=Portfolio.objects.filter(title=portfilio)[0],
