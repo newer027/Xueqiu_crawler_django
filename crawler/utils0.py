@@ -13,6 +13,15 @@ from bs4 import BeautifulSoup
 import time
 import pandas
 
+"""
+
+
+
+import re
+
+"""
+
+
 telephone = '18154377749'
 password  = 'ML34gbxq'
 
@@ -30,17 +39,17 @@ session = requests.session()
 
 
 def save_latest_change(url):
-    ZHs0={}
     headers = login(telephone, password)
-    print(headers)
-    url0 = 'https://xueqiu.com/stock/portfolio/stocks.json?size=1000&pid=-1&tuid='+url+'&cuid=1180102135&_=1477728185503'
+    url0 = 'https://xueqiu.com/'+url
     data = session.get(url0, headers=headers).text
-    data = json.loads(data)
+    soup = BeautifulSoup(data, "lxml")
+    followers = soup.find('li', class_="gender_info" )
+    followers = followers.find_next_siblings("li")[0]
+    followers = followers.contents[0]
+    print(followers)
 
 
-    print(data["stocks"], "stock"*20)
-
-
+"""
     if data["stocks"]:
         for item in data["stocks"]:
             if re.search('ZH\d{6}',str(item)):
@@ -53,7 +62,7 @@ def save_latest_change(url):
         for ZH in ZHs:
             get_xueqiu_hold("https://xueqiu.com/P/"+ZH, headers, url)
 
-"""
+
 def prof(url_ap0, ZHs0, headers, portfilio):
     url = 'https://xueqiu.com/cubes/rebalancing/history.json?cube_symbol='+url_ap0+'&count=20&page=1'
     data = session.get(url, headers=headers).text

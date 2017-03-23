@@ -3,7 +3,7 @@ from .models import Portfolio, Positions_change, Accumulated_position
 
 
 class PortfolioAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'created', 'status')
+    list_display = ('title', 'slug', 'created', 'status', 'num', 'name', 'followers')
 admin.site.register(Portfolio, PortfolioAdmin)
 
 

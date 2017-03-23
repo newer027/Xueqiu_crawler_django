@@ -3,20 +3,19 @@
 body {
     margin:0;
     padding:0;
-    font-family:helvetica, sans-serif;
 }
 
 p {
     line-height: 1.8;
 }
 
-a {
-    color:#12c064;
-    text-decoration:none;
+#name {
+    font-size: medium;
+    color: black;
 }
 
 a:hover {
-    color:#00a74f;
+    color:royalblue;
 }
 
 h1, h2, h3, h4, h5 , h6 { font-family: 'Muli', sans-serif; font-weight:normal; }
@@ -38,16 +37,16 @@ ol {
 #header {
     padding:10px 100px;
     font-size:14px;
-    background:#12c064;
-    color:#fff;
-    border-bottom:4px solid #1cdf78;
+    background:skyblue;
+    color:mediumblue;
+    border-bottom:4px solid dodgerblue;
     overflow:auto;
 }
 
 #header .logo {
     font-family: 'Muli', sans-serif;
     float:left;
-    color:#f3f7cc;
+    color:dodgerblue;
     font-size:20px;
     margin-right:10%;
 }
@@ -64,12 +63,13 @@ ol {
 }
 
 #header ul.menu li.selected a, #header ul.menu li.selected a:hover {
-    color:#1b6d32;
+    color:dodgerblue;
     font-weight:bold;
 }
 
 #header a {
-    color:#f3f7cc;
+    color: flex-wrap: wrap;;
+    font-size: larger;
 }
 #header a:hover {
     color:#fff;
@@ -104,7 +104,7 @@ input, textarea {
 }
 input[type=submit], a.button {
     font-weight:bold;
-    background:#12c064;
+    background:dodgerblue;
     color:#fff;
     padding:10px 20px;
     font-size:14px;
@@ -140,8 +140,8 @@ ul.messages li.info {
     color:#fff;
 }
 
-ul.messages li.success { background:#81ce81; }
-ul.messages li.success a { color:#0ac33e; }
+ul.messages li.success { background:dodgerblue; }
+ul.messages li.success a { color:dodgerblue; }
 
 ul.messages li.error { background:#a30029; color:#e9828e; }
 ul.messages li.error a { color:#e9828e; }
@@ -212,7 +212,7 @@ a.like, a.follow { float:right; margin-top:-8px; }
     width:220px;
     height:300px;
     margin:0 10px 10px 10px;
-    border-top:8px solid #12c064;
+    border-top:8px solid dodgerblue;
     background:#eee;
 }
 #image-list img { width:220px; height:220px; }
@@ -239,7 +239,7 @@ a.like, a.follow { float:right; margin-top:-8px; }
     margin-bottom:5px;
 }
 #people-list .user {
-    width:180px;
+    width:240px;
     float:left;
     overflow:auto;
     padding:10px;
@@ -270,3 +270,8 @@ img.user-detail {
     color:#ccc;
 }
 
+.small {
+    color:dodgerblue;
+    text-decoration:none;
+    font-size: x-small;
+}

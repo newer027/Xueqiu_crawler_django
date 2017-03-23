@@ -34,9 +34,13 @@
         <div id="people-list">
             {% for portfolio in portfolios %}
                 <div class="user">
-                    <a href="{{ portfolio.get_absolute_url }}">
-                        {{ portfolio.title }}
-                    </a>
+                    <a id="name" href="{{ portfolio.get_absolute_url }}">{{ portfolio.name }}</a>
+                    <br>
+                    <a class="small">ID {{ portfolio.title }}</a>
+                    <br>
+                    <a class="small">{{ portfolio.followers }}</a>
+                    <br>
+                    <a class="small">关注{{ portfolio.num }}个组合</a>
                 </div>
             {% endfor %}
         </div>

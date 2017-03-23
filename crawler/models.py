@@ -13,6 +13,9 @@ class Portfolio(models.Model):
     slug = models.SlugField(max_length=250)
     created = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=10, choices=STAUTS_CHOICE, default='pending')
+    num = models.IntegerField(default=0)
+    name = models.CharField(max_length=250)
+    followers = models.CharField(max_length=250)
 
     class Meta:
         ordering = ('-created',)
