@@ -41,7 +41,7 @@ def dashboard(request):
                 followers = "无可奉告"
                 slug = new_item.title
             if not Portfolio.objects.filter(slug=slug):
-                new_item.name = soup.title.string[0:len(soup.title.string)-4]
+                new_item.name = soup.title.string[0:len(soup.title.string)-5]
                 new_item.followers = followers
                 new_item.slug= slug
                 new_item.save()
