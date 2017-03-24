@@ -4,9 +4,9 @@ from .forms import CrawlerForm
 from .models import Portfolio, Accumulated_position, Positions_change
 from django.contrib import messages
 from crawler.login import login
-import json
 import requests
-
+import re
+from bs4 import BeautifulSoup
 
 agent = 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
 headers = {
@@ -28,21 +28,32 @@ def dashboard(request):
     form = CrawlerForm(data=request.POST or None)
     if form.is_valid():
         new_item = form.save(commit=False)
-        url0 = 'https://xueqiu.com/stock/portfolio/stocks.json?size=1000&pid=-1&tuid='+new_item.title+'&cuid=1180102135&_=1477728185503'
+        url = 'https://xueqiu.com/'+new_item.title
         headers = login(telephone, password)
-        data = session.get(url0, headers=headers).text
-        data = json.loads(data)
-        if "stocks" in data:
-            if not Portfolio.objects.filter(title=new_item.title):
+        data = session.get(url, headers=headers).text
+        try:
+            soup = BeautifulSoup(data, "lxml")
+            followers = soup.find('li', class_="gender_info" )
+            try:
+                followers = followers.find_next_siblings("li")[0]
+                followers = followers.contents[0]
+                slug = soup.find('a', class_="setRemark" )['data-user-id']
+            except:
+                followers = "无可奉告"
+                slug = new_item.title
+            if not Portfolio.objects.filter(slug=slug):
+                new_item.name = soup.title.string[0:len(soup.title.string)-4]
+                new_item.followers = followers
+                new_item.slug= slug
                 new_item.save()
                 messages.success(request, 'Portfolio added successfully')
                 return redirect('/crawler')
             else:
                 messages.error(request, 'Portfolio already in the database')
-        else:
+        except:
             messages.error(request, 'Portfolio does not exist')
     return render(request, 'crawler/dashboard.html', {'form': form,
-                                                      'portfolios': portfolios}) #render的用法
+                                                      'portfolios': portfolios})
 
 
 def portfolio_detail(request, slug):

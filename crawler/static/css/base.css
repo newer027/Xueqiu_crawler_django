@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Muli);
 
 body {
     margin:0;
@@ -68,7 +67,7 @@ ol {
 }
 
 #header a {
-    color: flex-wrap: wrap;;
+    color: black;
     font-size: larger;
 }
 #header a:hover {

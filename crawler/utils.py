@@ -36,6 +36,7 @@ def save_latest_change(url):
     data = session.get(url0, headers=headers).text
     data = json.loads(data)
 
+    """
     url1 = 'https://xueqiu.com/'+url
     data1 = session.get(url1, headers=headers).text
     soup = BeautifulSoup(data1, "lxml")
@@ -46,9 +47,8 @@ def save_latest_change(url):
     except:
         followers = "无可奉告"
 
-    ZHs = re.findall('ZH\d{6}',data["portfolios"][0]["stocks"])
     #if not Portfolio.objects.filter(slug=url).exists():
-    """
+
     portfolio = Portfolio(
         name = soup.title.string[0:len(soup.title.string)-4],
         followers = followers,
@@ -59,19 +59,22 @@ def save_latest_change(url):
     )
     portfolio.save()
     """
-    print(url,followers,len(ZHs),soup.title.string[0:len(soup.title.string)-4])
-    portfolio = Portfolio.objects.filter(title=url)
-    portfolio.update(followers=followers)
+    #print(url,followers,len(ZHs),soup.title.string[0:len(soup.title.string)-4])
+    #portfolio.update(followers=followers)
+    #portfolio.update(name = soup.title.string[0:len(soup.title.string)-4])
+
+    ZHs = re.findall('ZH\d{6}',data["portfolios"][0]["stocks"])
+    portfolio = Portfolio.objects.filter(slug=url)
+    print(len(ZHs))
     portfolio.update(num=len(ZHs))
-    portfolio.update(name = soup.title.string[0:len(soup.title.string)-4])
 
     for item in data["stocks"]:
         if re.search('ZH\d{6}',str(item)):
             ZHs0[item["code"]]=item["stockName"]
-    Positions_change.objects.filter(portfolio=Portfolio.objects.filter(title=url)[0]).delete()
+    Positions_change.objects.filter(portfolio=Portfolio.objects.filter(slug=url)[0]).delete()
     for ZH0 in ZHs0:
         prof(ZH0, ZHs0, headers, url)
-    Accumulated_position.objects.filter(portfolio=Portfolio.objects.filter(title=url)[0]).delete()
+    Accumulated_position.objects.filter(portfolio=Portfolio.objects.filter(slug=url)[0]).delete()
     for ZH in ZHs:
         get_xueqiu_hold("https://xueqiu.com/P/"+ZH, headers, url)
 
@@ -97,9 +100,9 @@ def prof(url_ap0, ZHs0, headers, portfilio):
             if (time.time() - (data[u'list'][i]['updated_at'] / 1000)) < 86400*20:
                 for j in range(len(data[u'list'][i]['rebalancing_histories'])):
                     detail = data[u'list'][i]['rebalancing_histories'][j]['stock_name'] + ': '+ data[u'list'][i]['rebalancing_histories'][j]['prev_weight_adjusted'] + '% ' + ("⬆" if float(data[u'list'][i]['rebalancing_histories'][j]['prev_weight_adjusted'])<float(data[u'list'][i]['rebalancing_histories'][j]['target_weight']) else "⇩") + ' '+ data[u'list'][i]['rebalancing_histories'][j]['target_weight'] + '%'
-                    if not Positions_change.objects.filter(detail=detail, portfolio=Portfolio.objects.filter(title=portfilio)[0], code=url_ap0).exists():
+                    if not Positions_change.objects.filter(detail=detail, portfolio=Portfolio.objects.filter(slug=portfilio)[0], code=url_ap0).exists():
                         positions_change = Positions_change(
-                            portfolio=Portfolio.objects.filter(title=portfilio)[0],
+                            portfolio=Portfolio.objects.filter(slug=portfilio)[0],
                             time= datetime.fromtimestamp(data[u'list'][i]['updated_at'] / 1000),
                             name=ZHs0[url_ap0],
                             code=url_ap0,
@@ -118,15 +121,15 @@ def get_xueqiu_hold(url, headers, portfilio):
                       script.string, flags=re.DOTALL | re.MULTILINE).group(1)
     data = json.loads(json_text)
     for d in data["view_rebalancing"]["holdings"]:
-        if not Accumulated_position.objects.filter(stock=d['stock_name'], portfolio=Portfolio.objects.filter(title=portfilio)[0]).exists():
+        if not Accumulated_position.objects.filter(stock=d['stock_name'], portfolio=Portfolio.objects.filter(slug=portfilio)[0]).exists():
             accumulated_position = Accumulated_position(
-                portfolio=Portfolio.objects.filter(title=portfilio)[0],
+                portfolio=Portfolio.objects.filter(slug=portfilio)[0],
                 stock=d['stock_name'],
                 percent = d['weight'],
                 people=1,
             )
             accumulated_position.save()
         else:
-            accumulated_position = Accumulated_position.objects.filter(stock=d['stock_name'], portfolio=Portfolio.objects.filter(title=portfilio)[0])
+            accumulated_position = Accumulated_position.objects.filter(stock=d['stock_name'], portfolio=Portfolio.objects.filter(slug=portfilio)[0])
             accumulated_position.update(percent=F('percent')+Decimal(d['weight']))
             accumulated_position.update(people=F('people')+1)

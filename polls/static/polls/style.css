@@ -1,0 +1,9 @@
+li a {
+    color: darkgreen;
+    font-size: large;
+}
+
+body {
+    background: white url("images/background.gif") repeat left top;
+}
+

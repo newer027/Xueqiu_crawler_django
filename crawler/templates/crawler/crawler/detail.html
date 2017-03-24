@@ -6,11 +6,12 @@
     <meta charset="utf-8" />
     <title>Xueqiu Crawler</title> <!--title用法-->
     <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="icon" type="image/jpg" href="{% static "images/icon.jpg" %}">
     <link href="{% static "css/base.css" %}" rel="stylesheet"> <!--css用法-->
     <link href="{% static "css/dataTables.css" %}" rel="stylesheet"> <!--css用法-->
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
-    <script src="http://cdn.staticdetail0.html.runoob.com/libs/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
 </head>
 <body>
     <div id="header">
@@ -18,7 +19,7 @@
     </div>
 
     <div id="people-list">
-        <a>雪球ID {{ portfolio.title }} 关注的组合信息</a>
+	 <a href="https://xueqiu.com/{{ portfolio.title }}">雪球ID {{ portfolio.title }} 关注的组合信息</a>
     </div>
 
 

@@ -18,5 +18,5 @@ def task_save_latest_protfilio_change():
     Saves latest image from Flickr
     """
     for url in Portfolio.objects.all():
-        save_latest_change(url.title)
+        save_latest_change(url.slug)
     logger.info("Saved change from Xueqiu")
