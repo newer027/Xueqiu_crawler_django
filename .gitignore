@@ -1,17 +1,15 @@
-<<<<<<< HEAD
+
 # Byte-compiled / optimized / DLL files
 =======
 .idea/
->>>>>>> 01acf815da1d9958c856013b95d46261d5d3e991
+
 __pycache__/
 *.py[cod]
 *$py.class
 celerybeat-schedule.bak
 db.sqlite3
-<<<<<<< HEAD
-=======
 
->>>>>>> 01acf815da1d9958c856013b95d46261d5d3e991
+celerybeat-schedule.dat
 # C extensions
 *.so
 
@@ -28,10 +26,10 @@ lib/
 lib64/
 parts/
 sdist/
-<<<<<<< HEAD
+
 =======
 
->>>>>>> 01acf815da1d9958c856013b95d46261d5d3e991
+
 var/
 wheels/
 *.egg-info/
@@ -54,7 +52,7 @@ htmlcov/
 .coverage
 .coverage.*
 .cache
-<<<<<<< HEAD
+
 nosetests.xml
 coverage.xml
 *,cover
@@ -85,11 +83,11 @@ target/
 .ipynb_checkpoints
 
 # pyenv
-=======
 
 
 
->>>>>>> 01acf815da1d9958c856013b95d46261d5d3e991
+
+
 .python-version
 
 # celery beat schedule file
@@ -112,9 +110,7 @@ ENV/
 # Rope project settings
 .ropeproject
 *.pyc
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> 01acf815da1d9958c856013b95d46261d5d3e991
+
