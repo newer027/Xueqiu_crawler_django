@@ -17,6 +17,12 @@ uuid._uuid_generate_random = None
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'crawler/static'),
+#)
+#STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, "crawler/static/")
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Quick-start development settings - unsuitable for production
