@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('crawler.api.urls', namespace='api')),
     url(r'^crawler/', include('crawler.urls', namespace='crawler')),
+    url(r'^polls/', include('polls.urls')),
 ]
