@@ -9,7 +9,7 @@ logger = get_task_logger(__name__)
 
 
 @periodic_task(
-    run_every=(crontab(minute='*/10')),
+    run_every=(crontab(minute='*/3')),
     name="task_save_latest_protfilio_change",
     ignore_result=True
 )

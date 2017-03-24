@@ -8,18 +8,15 @@
     <meta name="author" content="">
     <link rel="icon" type="image/jpg" href="/static/images/icon.jpg" />
 
-      <title>Polls调查</title>
+      <title>程健的几个小作品</title>
       {% load static %}
-      <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
+      <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
 
     <style type="text/css">
 		body {
@@ -36,15 +33,18 @@
     <div class="jumbotron">
       <div class="container">
           <a class="nav navbar-nav navbar-right" href="{% url 'admin:index' %}">administration</a>
-          <a href="{% url 'index' %}">返回主页</a>
-          <h1><a href="{% url "polls:index" %}">欢迎来到Polls调查!</a></h1>
       </div>
     </div>
 
     <div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				{% block content %}{% endblock %}
+				{% block content %}
+                    <h3><a href="{% url "crawler:dashboard" %}">抓雪球</a></h3>
+                    <a>正在跟踪{{ portfolio }}个雪球用户关注的组合变动</a>
+                    <h3><a href="{% url "polls:index" %}">Polls调查</a></h3>
+                    <a>有{{ question }}个用户调查在进行中</a>
+				{% endblock %}
 			</div>
 		</div>
 
@@ -59,7 +59,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>

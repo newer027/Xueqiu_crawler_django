@@ -4,7 +4,9 @@
 <head>
     <!--使用utf-8字符集-->
     <meta charset="utf-8" />
-    <title>Xueqiu Crawler</title> <!--title用法-->
+    <title>抓雪球</title> <!--title用法-->
+    <link rel="icon" type="image/jpg" href="/static/images/icon.jpg" />
+
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="icon" type="image/jpg" href="{% static "images/icon.jpg" %}">
     <link href="{% static "css/base.css" %}" rel="stylesheet"> <!--css用法-->
@@ -15,11 +17,12 @@
 </head>
 <body>
     <div id="header">
-        <span class="logo"><a href="{% url "crawler:dashboard" %}"> Xueqiu Crawler </a></span>
+        <span class="logo"><a href="{% url "crawler:dashboard" %}"> 抓雪球 </a></span>
+        <a class="nav navbar-nav navbar-right" href="{% url 'index' %}">返回主页</a>
     </div>
 
     <div id="people-list">
-	 <a href="https://xueqiu.com/{{ portfolio.title }}">雪球ID {{ portfolio.title }} 关注的组合信息</a>
+        <a href="https://xueqiu.com/{{ portfolio.title }}">雪球用户{{ portfolio.name }}关注的组合信息</a>
     </div>
 
 
@@ -31,10 +34,10 @@
             <table id="change" class="display" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>time</th>
-                        <th>name</th>
-                        <th>code</th>
-                        <th>detail</th>
+                        <th>调仓时间</th>
+                        <th>组合名称</th>
+                        <th>组合代码</th>
+                        <th>调仓明细</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,9 +62,9 @@
             <table id="accum" class="display" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>stock</th>
-                        <th>percent</th>
-                        <th>people</th>
+                        <th>股票</th>
+                        <th>累计百分比</th>
+                        <th>关注人数</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,7 +81,8 @@
     </div>
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/static/main.js"></script>
 </body>
