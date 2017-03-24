@@ -41,9 +41,9 @@
 			<div class="col-md-12">
 				{% block content %}
                     <h3><a href="{% url "crawler:dashboard" %}">抓雪球</a></h3>
-                    <a>正在跟踪{{ portfolio }}个雪球用户关注的组合变动</a>
+                    <a href="{% url "crawler:dashboard" %}">正在跟踪{{ portfolio }}个雪球用户关注的组合变动</a>
                     <h3><a href="{% url "polls:index" %}">Polls调查</a></h3>
-                    <a>有{{ question }}个用户调查在进行中</a>
+                    <a href="{% url "polls:index" %}">有{{ question }}个用户调查在进行中</a>
 				{% endblock %}
 			</div>
 		</div>
