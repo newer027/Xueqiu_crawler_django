@@ -4,13 +4,15 @@
 <head>
     <!--使用utf-8字符集-->
     <meta charset="utf-8" />
-    <title>Xueqiu Crawler</title> <!--title用法-->
+    <title>抓雪球</title> <!--title用法-->
+    <link rel="icon" type="image/jpg" href="/static/images/icon.jpg" />
     <link href="{% static "css/base.css" %}" rel="stylesheet"> <!--css用法-->
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
 </head>
 <body>
     <div id="header">
-        <span class="logo"><a href="{% url "crawler:dashboard" %}"> Xueqiu Crawler </a></span>
+        <span class="logo"><a href="{% url "crawler:dashboard" %}"> 抓雪球 </a></span>
+        <a class="nav navbar-nav navbar-right" href="{% url 'index' %}">返回主页</a>
     </div>
 
     <div id="content">
@@ -28,7 +30,7 @@
         <form action="." method="post">
             {{ form.as_p }}
             {% csrf_token %}
-            <input type="submit" value="Submit">
+            <input type="submit" value="添加雪球ID">
         </form>
 
         <ul class="messages"><li class="success">已经抓取的雪球账号</li></ul>

@@ -69,7 +69,9 @@ ol {
 #header a {
     color: black;
     font-size: larger;
+    padding-top: 6px;
 }
+
 #header a:hover {
     color:#fff;
 }
@@ -129,6 +131,7 @@ ul.messages {
     list-style-type:
     none;
 }
+
 ul.messages li.success,
 ul.messages li.warning,
 ul.messages li.error,
@@ -139,7 +142,7 @@ ul.messages li.info {
     color:#fff;
 }
 
-ul.messages li.success { background:dodgerblue; }
+ul.messages li.success { background:skyblue; }
 ul.messages li.success a { color:dodgerblue; }
 
 ul.messages li.error { background:#a30029; color:#e9828e; }
@@ -270,7 +273,12 @@ img.user-detail {
 }
 
 .small {
-    color:dodgerblue;
-    text-decoration:none;
+    color: rgba(0, 33, 80, 0.67);
+    text-decoration: none;
     font-size: x-small;
+}
+
+.navbar-right {
+    float: right!important;
+    margin-right: -15px;
 }

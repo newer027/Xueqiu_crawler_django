@@ -5,7 +5,6 @@ from .models import Portfolio, Accumulated_position, Positions_change
 from django.contrib import messages
 from crawler.login import login
 import requests
-import re
 from bs4 import BeautifulSoup
 
 agent = 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'

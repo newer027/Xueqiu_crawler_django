@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/jpg" href="/static/images/icon.jpg" />
+
+      <title>Learn by doing project</title>
+      {% load static %}
+      <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <style type="text/css">
+		body {
+			margin-top: 0;
+			padding-top: 0;
+		}
+    </style>
+
+  </head>
+
+  <body>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+          <a class="nav navbar-nav navbar-right" href="{% url 'admin:index' %}">administration</a>
+          <a href="{% url 'index' %}">返回主页</a>
+          <h1><a href="{% url "polls:index" %}">欢迎来到Polls调查!</a></h1>
+      </div>
+    </div>
+
+    <div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+
+		<hr>
+
+      <footer>
+        <p>&copy; 网络科技 2017</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
