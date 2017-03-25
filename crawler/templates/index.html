@@ -44,6 +44,8 @@
                     <a href="{% url "crawler:dashboard" %}">正在跟踪{{ portfolio }}个雪球用户关注的组合变动</a>
                     <h3><a href="{% url "polls:index" %}">Polls调查</a></h3>
                     <a href="{% url "polls:index" %}">有{{ question }}个用户调查在进行中</a>
+                    <h3><a href="{% url "courses:course_list" %}">在线教育站点</a></h3>
+                    <a href="{% url "courses:course_list" %}">有{{ course }}个课程可以在线学习</a>
 				{% endblock %}
 			</div>
 		</div>

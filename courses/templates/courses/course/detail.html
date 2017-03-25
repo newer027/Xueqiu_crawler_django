@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ object.title }}
+{% endblock %}
+
+{% block content %}
+    {% with subject=object.subject %}
+        <h1>
+            {{ object.title }}
+        </h1>
+        <div class="module">
+            <h2>总览</h2>
+            <p>
+                <!--subject.slug是urls.py=>course_list_subject中的<subject>-->
+                <a href="{% url "courses:course_list_subject" subject.slug %}">{{ subject.title }}</a>.
+                <!--modules.count的用法-->
+                {{ object.modules.count }}节课. 授课人: {{ object.owner.get_full_name }}
+            </p>
+            <!--linebreaks的用法-->
+            {{ object.overview|linebreaks }}
+            {% if request.user.is_authenticated %}
+                <!--action和method的用法-->
+                <form action="{% url "student_enroll_course" %}" method="post">
+                    {{ enroll_form }}
+                    {% csrf_token %}
+                    <input type="submit" class="button" value="开始学习">
+                </form>
+            {% else %}
+                <a href="{% url "student_registration" %}" class="button">
+                    请先注册
+                </a>
+            {% endif %}
+        </div>
+    {% endwith %}
+{% endblock %}

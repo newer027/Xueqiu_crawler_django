@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Edit "{{ course.title }}"
+{% endblock %}
+
+{% block content %}
+    <h1>Edit "{{ course.title }}"</h1>
+    <div class="module">
+        <h2>Course modules</h2>
+
+        <form action="" method="post">
+            {{ formset.as_p }}
+            <!--management_form包含隐藏字段,控制表单的初始/总计/最小/最大数目-->
+            {{ formset.management_form }}
+            {% csrf_token %}
+            <input type="submit" class="button" value="Save modules">
+        </form>
+    </div>
+{% endblock %}
