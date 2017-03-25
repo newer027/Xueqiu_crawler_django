@@ -21,12 +21,12 @@
         <ul id="modules">
             <!--不是subject的请求-->
             <li {% if not subject %}class="selected"{% endif %}>
-                <a href="{% url "courses:course_list" %}">所有</a>
+                <a href="{% url "course_list" %}">所有</a>
             </li>
             {% for s in subjects %}
                 <!--选中subject-->
                 <li {% if subject == s %}class="selected"{% endif %}>
-                    <a href="{% url "courses:course_list_subject" s.slug %}">
+                    <a href="{% url "course_list_subject" s.slug %}">
                         {{ s.title }}
                         <br><span>{{ s.total_courses }} 个课程</span>
                     </a>
@@ -37,9 +37,9 @@
     <div class="module">
         {% for course in courses %}
             {% with subject=course.subject %}
-                <h3><a href="{% url "courses:course_detail" course.slug %}">{{ course.title }}</a></h3>
+                <h3><a href="{% url "course_detail" course.slug %}">{{ course.title }}</a></h3>
                 <p>
-                    <a href="{% url "courses:course_list_subject" subject.slug %}">{{ subject }}</a>  有{{ course.total_modules }}节课.
+                    <a href="{% url "course_list_subject" subject.slug %}">{{ subject }}</a>  有{{ course.total_modules }}节课.
                     授课人: {{ course.owner.get_full_name }}
                 </p>
             {% endwith %}

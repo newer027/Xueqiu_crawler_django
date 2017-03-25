@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8" />
     <title>{% block title %}在线教育{% endblock %}</title>
-    <link href="{% static "css/base_edu.css" %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base_edu.css' %}">
 </head>
 <body>
     <div id="header">
-        <a href="{% url "courses:course_list" %}" class="logo">在线教育    </a>
+        <a href="{% url "course_list" %}" class="logo">在线教育    </a>
         <a href="{% url "student_course_list" %}" class="logo">    我的课程</a>
         <ul class="menu">
             {% if request.user.is_authenticated %}

@@ -10,12 +10,12 @@
             <div class="course-info">
                 <h3>{{ course.title }}</h3>
                 <p>
-                    <a href="{% url "courses:course_edit" course.id %}">编辑</a>
-                    <a href="{% url "courses:course_delete" course.id %}">删除</a>
-                    <a href="{% url "courses:course_module_update" course.id %}">编辑模块</a>
+                    <a href="{% url "course_edit" course.id %}">编辑</a>
+                    <a href="{% url "course_delete" course.id %}">删除</a>
+                    <a href="{% url "course_module_update" course.id %}">编辑模块</a>
                     {% if course.modules.count > 0 %}
                         <!--modules.first.id的用法-->
-                        <a href="{% url "courses:module_content_list" course.modules.first.id %}">管理模块</a>
+                        <a href="{% url "module_content_list" course.modules.first.id %}">管理模块</a>
                     {% endif %}
                 </p>
             </div>
@@ -23,7 +23,7 @@
             <p>你还没有创建课程</p>
         {% endfor %}
             <p>
-                <a href="{% url "courses:course_create" %}" class="button">创建新的课程</a>
+                <a href="{% url "course_create" %}" class="button">创建新的课程</a>
             </p>
     </div>
 {% endblock %}

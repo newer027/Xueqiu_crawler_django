@@ -3,7 +3,6 @@ from django.conf.urls import url
 from . import views
 
 
-app_name = 'courses'
 
 urlpatterns = [
     url(r'^mine/$', views.ManageCourseListView.as_view(), name='manage_course_list'),

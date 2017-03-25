@@ -13,7 +13,7 @@
             <h2>总览</h2>
             <p>
                 <!--subject.slug是urls.py=>course_list_subject中的<subject>-->
-                <a href="{% url "courses:course_list_subject" subject.slug %}">{{ subject.title }}</a>.
+                <a href="{% url "course_list_subject" subject.slug %}">{{ subject.title }}</a>.
                 <!--modules.count的用法-->
                 {{ object.modules.count }}节课. 授课人: {{ object.owner.get_full_name }}
             </p>
