@@ -8,6 +8,7 @@ __pycache__/
 *$py.class
 celerybeat-schedule.bak
 db.sqlite3
+celerybeat-schedule.dat
 
 celerybeat-schedule.dat
 # C extensions
@@ -29,7 +30,7 @@ sdist/
 
 =======
 
-
+Xueqiu_crawler_django/__pycache__/settings.cpython-36.pyc
 var/
 wheels/
 *.egg-info/
