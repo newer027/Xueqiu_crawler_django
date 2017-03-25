@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
+    'courses',
     'polls',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,11 +51,14 @@ INSTALLED_APPS = (
     'rest_framework',
     # custom apps
     'crawler',
+    'students',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -145,3 +149,11 @@ EMAIL_HOST_USER = '122521200@qq.com'
 EMAIL_HOST_PASSWORD = 'ifjqwlwbhtblcabg'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+from django.core.urlresolvers import reverse_lazy
+LOGIN_REDIRECT_URL = reverse_lazy('student_course_list')
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

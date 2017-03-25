@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}在线教育{% endblock %}</title>
+    <link href="{% static "css/base_edu.css" %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <a href="{% url "courses:course_list" %}" class="logo">在线教育    </a>
+        <a href="{% url "student_course_list" %}" class="logo">    我的课程</a>
+        <ul class="menu">
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url "logout" %}">退出</a></li>
+            {% else %}
+                <li><a href="{% url "login" %}">登录/<a href="{% url "student_registration" %}">注册</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            {% block domready %}
+            {% endblock %}
+        });
+    </script>
+</body>
+</html>
