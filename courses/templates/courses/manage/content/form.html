@@ -2,18 +2,18 @@
 
 {% block title %}
     {% if object %}
-        Edit content "{{ object.title }}"
+        编辑内容 "{{ object.title }}"
     {% else %}
-        Add a new content
+        添加内容
     {% endif %}
 {% endblock %}
 
 {% block content %}
     <h1>
         {% if object %}
-            Edit content "{{ object.title }}"
+            编辑内容 "{{ object.title }}"
         {% else %}
-            Add a new content
+            添加内容
         {% endif %}
     </h1>
     <div class="module">
@@ -23,7 +23,7 @@
         <form action="" method="post" enctype="multipart/form-data">
             {{ form.as_p }}
             {% csrf_token %}
-            <p><input type="submit" value="Save content"></p>
+            <p><input type="submit" value="保存内容"></p>
         </form>
     </div>
 {% endblock %}
