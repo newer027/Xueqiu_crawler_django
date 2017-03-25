@@ -1,29 +1,29 @@
 {% extends "base.html" %}
 
-{% block title %}My courses{% endblock %}
+{% block title %}我的课程{% endblock %}
 
 {% block content %}
-    <h1>My courses</h1>
+    <h1>我的课程</h1>
 
     <div class="module">
         {% for course in object_list %}
             <div class="course-info">
                 <h3>{{ course.title }}</h3>
                 <p>
-                    <a href="{% url "course_edit" course.id %}">Edit</a>
-                    <a href="{% url "course_delete" course.id %}">Delete</a>
-                    <a href="{% url "course_module_update" course.id %}">Edit modules</a>
+                    <a href="{% url "courses:course_edit" course.id %}">编辑</a>
+                    <a href="{% url "courses:course_delete" course.id %}">删除</a>
+                    <a href="{% url "courses:course_module_update" course.id %}">编辑模块</a>
                     {% if course.modules.count > 0 %}
                         <!--modules.first.id的用法-->
-                        <a href="{% url "module_content_list" course.modules.first.id %}">Manage contents</a>
+                        <a href="{% url "courses:module_content_list" course.modules.first.id %}">管理模块</a>
                     {% endif %}
                 </p>
             </div>
         {% empty %}
-            <p>You haven't created any courses yet.</p>
+            <p>你还没有创建课程</p>
         {% endfor %}
             <p>
-                <a href="{% url "course_create" %}" class="button">Create new course</a>
+                <a href="{% url "courses:course_create" %}" class="button">创建新的课程</a>
             </p>
     </div>
 {% endblock %}
