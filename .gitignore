@@ -10,7 +10,6 @@ celerybeat-schedule.bak
 db.sqlite3
 celerybeat-schedule.dat
 
-celerybeat-schedule.dat
 # C extensions
 *.so
 
