@@ -44,9 +44,10 @@
                     <h3><a href="{% url "polls:index" %}">Polls调查</a></h3>
                     <a href="{% url "polls:index" %}">有{{ question }}个用户调查在进行中</a>
                     <h3><a href="{% url "course_list" %}">在线教育站点</a></h3>
-                    <a href="{% url "course_list" %}">有{{ course }}个课程可以在线学习</a>
+                    <a class="img" href="{% url "course_list" %}">有{{ course }}个课程可以在线学习</a>
                     <br><br><br>
                     <img src="{% static "images/WX20170327-160608@2x.png" %}">
+
 				{% endblock %}
 			</div>
 		</div>

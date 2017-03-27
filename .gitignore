@@ -9,7 +9,6 @@ __pycache__/
 celerybeat-schedule.bak
 db.sqlite3
 
-celerybeat-schedule.dat
 # C extensions
 *.so
 
