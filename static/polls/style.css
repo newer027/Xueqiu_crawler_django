@@ -1,13 +1,16 @@
-li a {
+a.nav.navbar-nav.navbar-right {
+    float: right;
     color: green;
 }
 
-body {
-    background: white url("images/background.gif") repeat left top;
+
+
+li {
+    color: green;;
 }
 
-.jumbotron {
-    padding-top: 10px;
-    padding-bottom: 10px;
+body {
+
 }
+
 

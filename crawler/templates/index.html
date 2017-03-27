@@ -11,10 +11,9 @@
       <title>程健的几个小作品</title>
       {% load static %}
     <!-- Bootstrap core CSS -->
-      <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="{% static 'rest_framework/css/bootstrap-tweaks.css' %}" type="text/css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-      <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
 
 
@@ -46,16 +45,13 @@
                     <a href="{% url "polls:index" %}">有{{ question }}个用户调查在进行中</a>
                     <h3><a href="{% url "course_list" %}">在线教育站点</a></h3>
                     <a href="{% url "course_list" %}">有{{ course }}个课程可以在线学习</a>
+                    <br><br><br>
+                    <img src="{% static "images/WX20170327-160608@2x.png" %}">
 				{% endblock %}
 			</div>
 		</div>
 
-		<hr>
 
-      <footer>
-        <p>&copy; 网络科技 2017</p>
-      </footer>
-    </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript
