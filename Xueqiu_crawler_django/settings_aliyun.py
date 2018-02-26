@@ -92,6 +92,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Xueqiu_crawler_django.wsgi.application'
 
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -114,7 +115,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-"""
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

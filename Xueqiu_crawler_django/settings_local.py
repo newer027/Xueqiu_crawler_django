@@ -103,15 +103,14 @@ DATABASES = {
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 """
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'xueqiu_crawler',
-        'USER': 'ubuntu',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'crawler',
+        'USER': 'jacob',
         'PASSWORD': 'ML#$gbdb',
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': '127.0.0.1',
+	'PORT': '3306',
     }
 }
 """

@@ -1,6 +1,7 @@
 import requests
 import hashlib
 import re
+from .core import get_url,pro_chi
 
 
 # 构造 Request headers
@@ -38,12 +39,15 @@ def login(telephone, password):
         "remember_me": "on",
         "telephone": telephone
     }
-    log = session.post(login_url, data=postdata, headers=headers)
-    log = session.get("https://xueqiu.com/setting/user", headers=headers)
+    log = session.post(login_url, data=postdata, headers=headers,proxies=pro_chi())
+    log = session.get("https://xueqiu.com/setting/user", headers=headers,proxies=pro_chi())
     pa = r'"profile":"/(.*?)","screen_name":"(.*?)"'
     res = re.findall(pa, log.text)
     if res == []:
         print("登录失败，请检查你的手机号和密码输入是否正确")
     else:
         print('欢迎使用 xchaoinfo 写的模拟登录 \n 你的用户 id 是：%s, 你的用户名是：%s' % (res[0]))
+    #实例化一个LWPcookiejar对象
+
     return log.request.headers
+

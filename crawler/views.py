@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import CrawlerForm
 from .models import Portfolio, Accumulated_position, Positions_change
 from django.contrib import messages
-from crawler.login import login
+from .login import login
 import requests
 from bs4 import BeautifulSoup
 
@@ -19,8 +19,8 @@ headers = {
 session = requests.session()
 
 
-telephone = '18154377749'
-password  = 'ML34gbxq'
+telephone = '******'
+password  = '******'
 
 def dashboard(request):
     portfolios = Portfolio.objects.all()
@@ -30,27 +30,27 @@ def dashboard(request):
         url = 'https://xueqiu.com/'+new_item.title
         headers = login(telephone, password)
         data = session.get(url, headers=headers).text
+        #try:
+        soup = BeautifulSoup(data, "lxml")
+        followers = soup.find('li', class_="gender_info" )
         try:
-            soup = BeautifulSoup(data, "lxml")
-            followers = soup.find('li', class_="gender_info" )
-            try:
-                followers = followers.find_next_siblings("li")[0]
-                followers = followers.contents[0]
-                slug = soup.find('a', class_="setRemark" )['data-user-id']
-            except:
-                followers = "无可奉告"
-                slug = new_item.title
-            if not Portfolio.objects.filter(slug=slug):
-                new_item.name = soup.title.string[0:len(soup.title.string)-5]
-                new_item.followers = followers
-                new_item.slug= slug
-                new_item.save()
-                messages.success(request, 'Portfolio added successfully')
-                return redirect('/crawler')
-            else:
-                messages.error(request, 'Portfolio already in the database')
+            followers = followers.find_next_siblings("li")[0]
+            followers = followers.contents[0]
+            slug = soup.find('a', class_="setRemark" )['data-user-id']
         except:
-            messages.error(request, 'Portfolio does not exist')
+            followers = "无可奉告"
+            slug = new_item.title
+        if not Portfolio.objects.filter(slug=slug):
+            new_item.name = soup.title.string[0:len(soup.title.string)-5]
+            new_item.followers = followers
+            new_item.slug= slug
+            new_item.save()
+            messages.success(request, 'Portfolio added successfully')
+            return redirect('/crawler')
+        else:
+            messages.error(request, 'Portfolio already in the database')
+        #except:
+            #messages.error(request, 'Portfolio does not exist')
     return render(request, 'crawler/dashboard.html', {'form': form,
                                                       'portfolios': portfolios})
 

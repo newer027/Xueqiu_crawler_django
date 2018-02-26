@@ -22,8 +22,8 @@ import re
 """
 
 
-telephone = '18154377749'
-password  = 'ML34gbxq'
+telephone = '******'
+password  = '******'
 
 agent = 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
 headers = {

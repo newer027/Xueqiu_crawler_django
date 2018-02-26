@@ -5,7 +5,7 @@ from crawler.login import login
 from datetime import datetime
 from decimal import Decimal
 from django.db.models import F
-
+from django.utils import timezone
 import json
 import requests
 import re
@@ -13,8 +13,8 @@ from bs4 import BeautifulSoup
 import time
 import pandas
 
-telephone = '18154377749'
-password  = 'ML34gbxq'
+telephone = '******'
+password  = '******'
 
 agent = 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
 headers = {
@@ -33,7 +33,15 @@ def save_latest_change(url):
     ZHs0={}
     headers = login(telephone, password)
     url0 = 'https://xueqiu.com/stock/portfolio/stocks.json?size=1000&pid=-1&tuid='+url+'&cuid=1180102135&_=1477728185503'
-    data = session.get(url0, headers=headers).text
+    #data = session.get(url0, headers=headers).text
+    count=0
+    while count<8:
+        try:
+            data = session.get(url0, headers=headers).text
+            count+=1
+        except:
+            time.sleep(2)
+            continue
     data = json.loads(data)
 
     """
@@ -81,7 +89,15 @@ def save_latest_change(url):
 
 def prof(url_ap0, ZHs0, headers, portfilio):
     url = 'https://xueqiu.com/cubes/rebalancing/history.json?cube_symbol='+url_ap0+'&count=20&page=1'
-    data = session.get(url, headers=headers).text
+    count=0
+    while count<8:
+        try:
+            data = session.get(url, headers=headers).text
+            count+=1
+        except:
+            time.sleep(2)
+            continue
+
     data = json.loads(data)
 
     for i in range(len(data[u'list'])):
@@ -103,7 +119,8 @@ def prof(url_ap0, ZHs0, headers, portfilio):
                     if not Positions_change.objects.filter(detail=detail, portfolio=Portfolio.objects.filter(slug=portfilio)[0], code=url_ap0).exists():
                         positions_change = Positions_change(
                             portfolio=Portfolio.objects.filter(slug=portfilio)[0],
-                            time= datetime.fromtimestamp(data[u'list'][i]['updated_at'] / 1000),
+                            time= timezone.make_aware(datetime.fromtimestamp(data[u'list'][i]['updated_at'] / 1000)),
+                            #time= datetime.fromtimestamp(data[u'list'][i]['updated_at'] / 1000),
                             name=ZHs0[url_ap0],
                             code=url_ap0,
                             detail=detail
